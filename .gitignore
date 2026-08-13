@@ -227,3 +227,6 @@ _Pvt_Extensions
 # Build/publish output
 /bin/
 /source/bin/
+
+# WiX build intermediates
+*.wixpdb

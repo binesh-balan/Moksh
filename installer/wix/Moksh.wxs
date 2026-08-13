@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  MOKSH MSI package.
+
+  Per-machine, x64, built for Intune / RMM deployment:
+      msiexec /i Moksh_6.2_x64.msi /qn
+
+  The payload is the signed publish output. Harvesting uses the <Files> element
+  rather than heat, so new files (extra locale satellites, new helper exes) are
+  picked up automatically without regenerating a component list.
+
+  ProductCode is auto-generated per build and UpgradeCode is fixed, which is what
+  MajorUpgrade requires. The application therefore locates its own installation
+  through the stable vendor key written below, not through the ProductCode.
+-->
+<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
+
+  <?define ProductName    = "MOKSH" ?>
+  <?define Manufacturer   = "Binesh Balan" ?>
+  <?define ProductVersion = "6.2.0" ?>
+  <!-- Stable for the lifetime of the product. Never change this. -->
+  <?define UpgradeCodeGuid = "99F463E7-34FC-4313-A1E8-A3218E2957DC" ?>
+
+  <Package
+      Name="$(ProductName)"
+      Manufacturer="$(Manufacturer)"
+      Version="$(ProductVersion)"
+      UpgradeCode="$(UpgradeCodeGuid)"
+      Scope="perMachine"
+      Compressed="yes"
+      InstallerVersion="500">
+
+    <SummaryInformation
+        Description="MOKSH - bulk application uninstaller. Based on Bulk Crap Uninstaller by Marcin Szeniak (Klocman), Apache-2.0."
+        Manufacturer="$(Manufacturer)" />
+
+    <MediaTemplate EmbedCab="yes" CompressionLevel="high" />
+
+    <!-- Removes the previous version before laying down the new one. -->
+    <MajorUpgrade
+        AllowSameVersionUpgrades="yes"
+        DowngradeErrorMessage="A newer version of [ProductName] is already installed. Uninstall it first if you want to install this older version." />
+
+    <!--
+      .NET 8 Desktop Runtime gate.
+
+      This checks whether ANY Microsoft.WindowsDesktop.App runtime is registered, not
+      whether version 8 specifically is present: the runtime records installed versions
+      as registry VALUE NAMES under this key (8.0.27, 10.0.8, ...), which a plain MSI
+      AppSearch cannot enumerate or compare. So this catches "no desktop runtime at all"
+      and nothing subtler.
+
+      For fleet deployment, declare the .NET 8 Desktop Runtime as an Intune app
+      dependency instead of relying on this - Intune resolves versions properly.
+    -->
+    <Property Id="DOTNETDESKTOPPRESENT">
+      <RegistrySearch
+          Id="SearchDotnetDesktop"
+          Root="HKLM"
+          Key="SOFTWARE\dotnet\Setup\InstalledVersions\x64\sharedfx\Microsoft.WindowsDesktop.App"
+          Type="raw"
+          Bitness="always32" />
+    </Property>
+
+    <Launch
+        Condition="Installed OR DOTNETDESKTOPPRESENT OR SKIPDOTNETCHECK"
+        Message="[ProductName] requires the .NET 8 Desktop Runtime (x64), which was not found on this machine. Install it from https://dotnet.microsoft.com/download/dotnet/8.0 and run setup again. To bypass this check, pass SKIPDOTNETCHECK=1." />
+
+    <!-- 64-bit only: the payload is AnyCPU but the app targets x64/ARM64 systems. -->
+    <Launch
+        Condition="VersionNT64"
+        Message="[ProductName] requires a 64-bit version of Windows." />
+
+    <!-- Passed on the command line: source paths resolve against the build working
+         directory, not against this file, so hardcoding a relative path is fragile. -->
+    <Icon Id="MokshIcon" SourceFile="$(IconFile)" />
+    <Property Id="ARPPRODUCTICON" Value="MokshIcon" />
+    <Property Id="ARPNOREPAIR" Value="1" />
+    <Property Id="ARPHELPLINK" Value="https://github.com/binesh-balan/Moksh/issues" />
+    <Property Id="ARPURLINFOABOUT" Value="https://github.com/binesh-balan/Moksh" />
+    <Property Id="ARPURLUPDATEINFO" Value="https://github.com/binesh-balan/Moksh/releases" />
+
+    <Feature Id="Main" Title="$(ProductName)" Level="1" AllowAbsent="no">
+      <ComponentGroupRef Id="ApplicationFiles" />
+      <ComponentGroupRef Id="ApplicationRegistry" />
+      <ComponentGroupRef Id="ApplicationShortcuts" />
+      <ComponentGroupRef Id="GeneratedFileCleanup" />
+    </Feature>
+
+  </Package>
+
+  <Fragment>
+    <StandardDirectory Id="ProgramFiles64Folder">
+      <Directory Id="INSTALLFOLDER" Name="Moksh" />
+    </StandardDirectory>
+    <StandardDirectory Id="ProgramMenuFolder">
+      <Directory Id="ShortcutFolder" Name="MOKSH" />
+    </StandardDirectory>
+  </Fragment>
+
+  <!--
+    Payload. PublishDir is passed on the command line and points at the SIGNED
+    publish output, so the MSI never ships unsigned binaries by accident.
+
+    CleanLogs.bat is excluded: it exists to clean up after the portable build and
+    an installed deployment has nothing for it to do.
+  -->
+  <Fragment>
+    <ComponentGroup Id="ApplicationFiles" Directory="INSTALLFOLDER">
+      <Files Include="$(PublishDir)\**">
+        <Exclude Files="$(PublishDir)\CleanLogs.bat" />
+        <Exclude Files="$(PublishDir)\**\*.pdb" />
+      </Files>
+    </ComponentGroup>
+  </Fragment>
+
+  <Fragment>
+    <ComponentGroup Id="ApplicationRegistry" Directory="INSTALLFOLDER">
+      <Component Id="VendorRegistryKey" Guid="*">
+        <!--
+          Stable identity for the application to find itself. Must match
+          Program.VendorRegistryKey. Survives major upgrades, unlike ProductCode.
+        -->
+        <RegistryKey Root="HKLM" Key="SOFTWARE\Binesh Balan\Moksh">
+          <RegistryValue Name="InstallLocation" Type="string" Value="[INSTALLFOLDER]" KeyPath="yes" />
+          <RegistryValue Name="Version"         Type="string" Value="$(ProductVersion)" />
+          <RegistryValue Name="ProductCode"     Type="string" Value="[ProductCode]" />
+        </RegistryKey>
+      </Component>
+    </ComponentGroup>
+  </Fragment>
+
+  <Fragment>
+    <ComponentGroup Id="ApplicationShortcuts" Directory="ShortcutFolder">
+      <Component Id="StartMenuShortcuts" Guid="*">
+        <Shortcut
+            Id="StartMenuMoksh"
+            Name="MOKSH"
+            Description="Remove large amounts of unwanted applications quickly"
+            Target="[INSTALLFOLDER]Moksh.exe"
+            WorkingDirectory="INSTALLFOLDER" />
+        <RemoveFolder Id="RemoveShortcutFolder" On="uninstall" />
+        <!-- Per-user keypath is required for a shortcut component. -->
+        <RegistryValue Root="HKCU" Key="SOFTWARE\Binesh Balan\Moksh" Name="Shortcuts" Type="integer" Value="1" KeyPath="yes" />
+      </Component>
+    </ComponentGroup>
+  </Fragment>
+
+  <!--
+    Files the application creates next to itself at runtime. MSI only removes what it
+    installed, so without this the install folder is left behind on uninstall holding
+    caches and settings. Mirrors the [UninstallDelete] section of the Inno Setup script.
+  -->
+  <Fragment>
+    <ComponentGroup Id="GeneratedFileCleanup" Directory="INSTALLFOLDER">
+      <Component Id="CleanupGeneratedFiles" Guid="*">
+        <RegistryValue Root="HKLM" Key="SOFTWARE\Binesh Balan\Moksh" Name="Cleanup" Type="integer" Value="1" KeyPath="yes" />
+        <RemoveFile Id="RemoveSettings"   Name="Moksh.settings"    On="uninstall" />
+        <RemoveFile Id="RemoveInfoCache"  Name="InfoCache.xml"     On="uninstall" />
+        <RemoveFile Id="RemoveCertCache"  Name="CertCache.xml"     On="uninstall" />
+        <RemoveFile Id="RemoveUsageStats" Name="UsageStatistics.xml" On="uninstall" />
+        <RemoveFile Id="RemoveCustomNotes" Name="CustomNotes.xml"  On="uninstall" />
+        <RemoveFile Id="RemoveLogs"       Name="*.log"             On="uninstall" />
+        <RemoveFile Id="RemoveRatingCache" Name="RatingCashe*"     On="uninstall" />
+        <RemoveFile Id="RemoveExceptions" Name="Exception_*.zip"   On="uninstall" />
+        <RemoveFolder Id="RemoveInstallFolder" On="uninstall" />
+      </Component>
+    </ComponentGroup>
+  </Fragment>
+
+</Wix>

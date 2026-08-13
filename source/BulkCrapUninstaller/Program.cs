@@ -187,6 +187,13 @@ namespace BulkCrapUninstaller
             const string appId = "edf1b036-2b58-45ab-a933-88b908e026f8";
             const string regUninstallersKeyDirect = @"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall";
 
+            // Preferred: a stable per-vendor key written by the installer.
+            // The Inno Setup AppId below is fixed, but an MSI names its uninstall key after the
+            // ProductCode, which has to change on every major upgrade - so a hardcoded GUID stops
+            // matching after the first upgrade. This key does not move between versions.
+            if (TryGetInstalledFromVendorKey())
+                return;
+
             try
             {
                 using var regKey = Registry.LocalMachine.OpenSubKey(regUninstallersKeyDirect);
@@ -216,6 +223,42 @@ namespace BulkCrapUninstaller
             catch
             {
                 _installedRegistryKeyName = String.Empty;
+            }
+        }
+
+        /// <summary>
+        ///     Registry key the MSI writes so the application can recognise an installed deployment
+        ///     without depending on a ProductCode that changes with every major upgrade.
+        /// </summary>
+        internal const string VendorRegistryKey = @"SOFTWARE\Binesh Balan\Moksh";
+
+        /// <summary>
+        ///     Returns true if the vendor key exists and points at this copy of the application.
+        /// </summary>
+        private static bool TryGetInstalledFromVendorKey()
+        {
+            try
+            {
+                using var key = Registry.LocalMachine.OpenSubKey(VendorRegistryKey);
+
+                var installLocation = key?.GetStringSafe(RegistryFactory.RegistryNameInstallLocation);
+                if (string.IsNullOrEmpty(installLocation))
+                    return false;
+
+                // Only claim to be installed if this executable is the installed one - a portable
+                // copy running on a machine that also has MOKSH installed must still report portable.
+                if (!PathTools.SubPathIsInsideBasePath(installLocation, AssemblyLocation.FullName, true, true))
+                    return false;
+
+                // Prefer the real ARP key name when the installer recorded it, so callers that use
+                // this value to locate the uninstall entry keep working.
+                var productCode = key.GetStringSafe("ProductCode");
+                _installedRegistryKeyName = string.IsNullOrEmpty(productCode) ? VendorRegistryKey : productCode;
+                return true;
+            }
+            catch
+            {
+                return false;
             }
         }
 
