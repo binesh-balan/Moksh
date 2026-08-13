@@ -147,9 +147,6 @@
   <data name="p1HelpHeading.Text" xml:space="preserve">
     <value>هل تريد المساعدة ؟</value>
   </data>
-  <data name="p1HelpDesc.Text" xml:space="preserve">
-    <value>الى لغتك الاصليه. كل مساعده هو موضع تقدير كبير ، مهما كانت صغيره MØKSH ليس عليك ان تكون مبرمجا للمساعدة! يمكنك التبرع لتسريع التحديثات ، او ترجمه </value>
-  </data>
   <data name="buttonTranslate.Text" xml:space="preserve">
     <value>MØKSH ترجمه  </value>
   </data>

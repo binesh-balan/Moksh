@@ -141,15 +141,6 @@
   <data name="p5finishContact.Text" xml:space="preserve">
     <value>Giờ đây bạn đã có thể bắt đầu sử dụng MØKSH. Nếu bạn có bất kỳ câu hỏi nào hoặc muốn đề xuất tính năng mới, hãy truy cập liên kết bên dưới.</value>
   </data>
-  <data name="p5LinkContact.Text" xml:space="preserve">
-    <value>Mở biểu mẫu liên hệ</value>
-  </data>
-  <data name="p5finishHomepage.Text" xml:space="preserve">
-    <value>Bạn có thể đọc nhật ký thay đổi chi tiết và xem thêm các phần mềm khác của tôi tại trang chủ.</value>
-  </data>
-  <data name="p5LinkHomepage.Text" xml:space="preserve">
-    <value>Mở trang chủ</value>
-  </data>
   <data name="p5finishTitle.Text" xml:space="preserve">
     <value>Quá trình thiết lập đã hoàn tất</value>
   </data>
@@ -298,12 +289,6 @@ Cảnh báo: Quá trình xác minh có thể mất nhiều thời gian.</value>
   </data>
   <data name="buttonLanguageApply.Text" xml:space="preserve">
     <value>Chấp nhận</value>
-  </data>
-  <data name="p1languageExtradetails.Text" xml:space="preserve">
-    <value>Nếu bạn sẵn lòng giúp dịch thuật MØKSH sang ngôn ngữ mẹ đẻ của mình, hãy nhấp vào liên kết bên dưới để liên hệ với tôi. Mọi sự giúp đỡ đều rất đáng trân trọng!</value>
-  </data>
-  <data name="p1linkLabelContact.Text" xml:space="preserve">
-    <value>Mở biểu mẫu liên hệ</value>
   </data>
   <data name="label2.Text" xml:space="preserve">
     <value>MØKSH</value>

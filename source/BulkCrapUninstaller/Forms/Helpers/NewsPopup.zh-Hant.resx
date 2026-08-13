@@ -135,9 +135,6 @@
   <data name="linkLabel5.Text" xml:space="preserve">
     <value>查看幫助文件</value>
   </data>
-  <data name="linkLabel6.Text" xml:space="preserve">
-    <value>傳送回饋/聯絡開發者</value>
-  </data>
   <data name="linkLabel7.Text" xml:space="preserve">
     <value>捐款(PayPal,BitCoin,Steam 禮物)</value>
   </data>

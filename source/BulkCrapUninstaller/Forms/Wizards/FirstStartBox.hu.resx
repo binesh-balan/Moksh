@@ -138,15 +138,6 @@
   <data name="p5finishContact.Text" xml:space="preserve">
     <value>Most már használhatja a MØKSH-t. Ha kérdése lenne, vagy egy újabb funkciót szeretne javasolni kattintson a lenti hivatkozásra.</value>
   </data>
-  <data name="p5LinkContact.Text" xml:space="preserve">
-    <value>Kapcsolat űrlap megnyitása</value>
-  </data>
-  <data name="p5finishHomepage.Text" xml:space="preserve">
-    <value>A módosítások részleteit elolvashatja a honlapunkon, illetve ott további információkat kaphat.</value>
-  </data>
-  <data name="p5LinkHomepage.Text" xml:space="preserve">
-    <value>Honlap megnyitása</value>
-  </data>
   <data name="p5finishTitle.Text" xml:space="preserve">
     <value>A telepítés befejeződött</value>
   </data>
@@ -295,12 +286,6 @@ Figyelem: Az ellenőrzés hosszabb ideig is eltarthat.</value>
   </data>
   <data name="buttonLanguageApply.Text" xml:space="preserve">
     <value>Alkalmaz</value>
-  </data>
-  <data name="p1languageExtradetails.Text" xml:space="preserve">
-    <value>Ha lefordítaná a saját nyelvére a MØKSH-t, kattintson az alábbi hivatkozásra a kapcsolatfelvételhez. Minden segítséget szívesen fogadunk!</value>
-  </data>
-  <data name="p1linkLabelContact.Text" xml:space="preserve">
-    <value>Kapcsolat űrlap megnyitása</value>
   </data>
   <data name="label2.Text" xml:space="preserve">
     <value>MØKSH</value>

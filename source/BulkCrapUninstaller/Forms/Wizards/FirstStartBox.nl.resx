@@ -139,15 +139,6 @@
     <value>U kunt de MØKSH nu starten.
 Als u vragen hebt of een nieuwe functie wilt voorstellen, gelieve onderstaande link te gebruiken.</value>
   </data>
-  <data name="p5LinkContact.Text" xml:space="preserve">
-    <value>Contactformulier openen</value>
-  </data>
-  <data name="p5finishHomepage.Text" xml:space="preserve">
-    <value>Gedetailleerde verslagen van programma wijzigingen en mijn andere software vindt u op mijn homepagina.</value>
-  </data>
-  <data name="p5LinkHomepage.Text" xml:space="preserve">
-    <value>Homepagina openen</value>
-  </data>
   <data name="p5finishTitle.Text" xml:space="preserve">
     <value>Setup is voltooid.</value>
   </data>
@@ -301,12 +292,6 @@ Na een herstart wordt de gekozen taal overgenomen.</value>
   </data>
   <data name="buttonLanguageApply.Text" xml:space="preserve">
     <value>Toepassen</value>
-  </data>
-  <data name="p1languageExtradetails.Text" xml:space="preserve">
-    <value>Als u wilt helpen met de vertaling van MØKSH in uw taal, klik dan op de link hieronder om contact met mij op te nemen. Alle hulp is welkom!</value>
-  </data>
-  <data name="p1linkLabelContact.Text" xml:space="preserve">
-    <value>Contactformulier openen</value>
   </data>
   <data name="label2.Text" xml:space="preserve">
     <value>MØKSH</value>

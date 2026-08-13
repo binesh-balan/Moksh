@@ -132,9 +132,6 @@
   <data name="p1HelpHeading.Text" xml:space="preserve">
     <value>Szeretne segíteni nekünk?</value>
   </data>
-  <data name="p1HelpDesc.Text" xml:space="preserve">
-    <value>Nem kell programozónak lennie, hogy segítsen! Hozzájárulhat a frissítések felgyorsításához, vagy lefordíthatja a MØKSH-t a saját nyelvére. Bármilyen kicsi segítséget is szívesen veszünk!</value>
-  </data>
   <data name="buttonSendFeedback2.Text" xml:space="preserve">
     <value>Visszajelzés</value>
   </data>

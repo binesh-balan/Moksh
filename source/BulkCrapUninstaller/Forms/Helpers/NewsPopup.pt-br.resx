@@ -138,9 +138,6 @@
   <data name="linkLabel5.Text" xml:space="preserve">
     <value>Ler arquivo de ajuda</value>
   </data>
-  <data name="linkLabel6.Text" xml:space="preserve">
-    <value>Enviar feedback / Contatar o desenvolvedor</value>
-  </data>
   <data name="linkLabel7.Text" xml:space="preserve">
     <value>Doar (Paypal, Bitcoin, Steam gifts)</value>
   </data>

@@ -141,15 +141,6 @@
   <data name="p5finishContact.Text" xml:space="preserve">
     <value>現在可以開始使用MØKSH。如果你有任何問題或想建議一個新功能，請透過下面的連結。</value>
   </data>
-  <data name="p5LinkContact.Text" xml:space="preserve">
-    <value>開啟聯絡表單</value>
-  </data>
-  <data name="p5finishHomepage.Text" xml:space="preserve">
-    <value>你可以查看詳細的更新日誌，並在官網上查看我的其他軟體。</value>
-  </data>
-  <data name="p5LinkHomepage.Text" xml:space="preserve">
-    <value>開啟官網</value>
-  </data>
   <data name="p5finishTitle.Text" xml:space="preserve">
     <value>設定已完成</value>
   </data>
@@ -298,12 +289,6 @@
   </data>
   <data name="buttonLanguageApply.Text" xml:space="preserve">
     <value>套用</value>
-  </data>
-  <data name="p1languageExtradetails.Text" xml:space="preserve">
-    <value>如果願意幫助將MØKSH翻譯成你的語言，請點擊下面的連結與我聯繫。非常感謝你的幫助！</value>
-  </data>
-  <data name="p1linkLabelContact.Text" xml:space="preserve">
-    <value>開啟聯絡視窗</value>
   </data>
   <data name="label2.Text" xml:space="preserve">
     <value>MØKSH</value>

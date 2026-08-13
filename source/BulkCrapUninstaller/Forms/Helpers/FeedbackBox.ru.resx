@@ -147,9 +147,6 @@
   <data name="p1HelpHeading.Text" xml:space="preserve">
     <value>Хотите помочь?</value>
   </data>
-  <data name="p1HelpDesc.Text" xml:space="preserve">
-    <value>Вам не обязательно быть программистом, чтобы помочь! Вы можете сделать пожертвование для ускорения выхода обновлений или перевести MØKSH на ваш родной язык. Любая помощь приветствуется, независимо от её размера!</value>
-  </data>
   <data name="buttonTranslate.Text" xml:space="preserve">
     <value>Перевести MØKSH</value>
   </data>

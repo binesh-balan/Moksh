@@ -141,9 +141,6 @@
   <data name="p3advProtectTitle.Text" xml:space="preserve">
     <value>Zaščiteni odstranjevalci</value>
   </data>
-  <data name="p5LinkHomepage.Text" xml:space="preserve">
-    <value>Odpri domačo stran</value>
-  </data>
   <data name="p4netDesc1.Text" xml:space="preserve">
     <value>● Za iskanje posodobitev programa.</value>
   </data>
@@ -187,9 +184,6 @@ Iz menijske vrstice lahko ročno poiščete posodobitve.</value>
   </data>
   <data name="checkBoxListSysComp.Text" xml:space="preserve">
     <value>Prikaži odstranjevalce, ki so označene kot  "sistemske sestavine"</value>
-  </data>
-  <data name="p5finishHomepage.Text" xml:space="preserve">
-    <value>Lahko preberete podrobne dnevnike sprememb in preverite več mojih programov na domači spletni strani.</value>
   </data>
   <data name="p4netErrors.Text" xml:space="preserve">
     <value>Vsakič, ko pride do napake boste vprašani, če želite poslati sporočilo o napaki. Lahko preverite kateri podatki bodo poslani v poročilu o napaki in v poročilu o uporabi, z upogledom v njune XML datoteke (v imeniku MØKSHja). Poslani podatki ne bodo dostopni drugim osebam.</value>
@@ -270,9 +264,6 @@ Iz menijske vrstice lahko ročno poiščete posodobitve.</value>
     <value>Neregistrirane aplikacije so označene z rdečo barvo.
 Če ni mogoče najti izvirnega odstranjevalca, boste morali uporabiti možnost "Odstrani ročno", da jih odstranite.</value>
   </data>
-  <data name="p1linkLabelContact.Text" xml:space="preserve">
-    <value>Odpri obrazec za stik</value>
-  </data>
   <data name="p2viewAdd.Text" xml:space="preserve">
     <value>Preverjeni odstranjevalci so označeni z zeleno barvo, nepreverjeni pa so v modri barvi.
 Opozorilo: Preverjanje lahko traja dlje časa.</value>
@@ -289,12 +280,6 @@ Opozorilo: Preverjanje lahko traja dlje časa.</value>
   </data>
   <data name="p2viewDetail1.Text" xml:space="preserve">
     <value>● Uporabite filtre in poiščite ključne besede (v vseh stolpcih)</value>
-  </data>
-  <data name="p5LinkContact.Text" xml:space="preserve">
-    <value>Odpri obrazec za stik</value>
-  </data>
-  <data name="p1languageExtradetails.Text" xml:space="preserve">
-    <value>Če ste pripravljeni pomagati prevesti MØKSH v vaš jezik, kliknite na spodnjo povezavo, da stopite v stik z mano. Vsa pomoč je zelo cenjena!</value>
   </data>
   <data name="p4netDesc2.Text" xml:space="preserve">
     <value>● Za pošiljanje poročil o napakah.</value>

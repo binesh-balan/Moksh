@@ -123,9 +123,6 @@
   <data name="linkLabel7.Text" xml:space="preserve">
     <value>Bağış (PayPal, Bitcoin, Steam hediyeleri)</value>
   </data>
-  <data name="linkLabel6.Text" xml:space="preserve">
-    <value>Geri bildirim gönder / Geliştiriciye başvurun</value>
-  </data>
   <data name="linkLabel5.Text" xml:space="preserve">
     <value>Yardım dosyasını okuyun</value>
   </data>

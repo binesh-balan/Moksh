@@ -123,9 +123,6 @@
   <data name="linkLabel7.Text" xml:space="preserve">
     <value>Donner (Paypal, Bitcoin, cadeaux Steam)</value>
   </data>
-  <data name="linkLabel6.Text" xml:space="preserve">
-    <value>Envoyez un retour / Contacter le développeur</value>
-  </data>
   <data name="linkLabel5.Text" xml:space="preserve">
     <value>Lire le fichier d'aide</value>
   </data>

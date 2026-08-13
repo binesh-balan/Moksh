@@ -132,9 +132,6 @@
   <data name="p1HelpHeading.Text" xml:space="preserve">
     <value>Ali želite pomagati?</value>
   </data>
-  <data name="p1HelpDesc.Text" xml:space="preserve">
-    <value>Saj ni treba biti programer, da boste lahko pomagali! Lahko prispevate darilo, da pospešite posodabljanje ali prevedete MØKSH v svoj materni jezik. Vsa pomoč je zelo cenjena, ne glede na to, kako majhna bo!</value>
-  </data>
   <data name="buttonSendFeedback2.Text" xml:space="preserve">
     <value>Pošlji povratno informacijo</value>
   </data>

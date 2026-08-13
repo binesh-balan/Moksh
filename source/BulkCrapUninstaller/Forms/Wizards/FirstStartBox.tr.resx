@@ -141,15 +141,6 @@
   <data name="p5finishContact.Text" xml:space="preserve">
     <value>Artık MØKSH'ı kullanmaya başlayabilirsiniz. Herhangi bir sorunuz varsa veya yeni bir özellik önermek istiyorsanız, aşağıdaki bağlantıyı ziyaret edin.</value>
   </data>
-  <data name="p5LinkContact.Text" xml:space="preserve">
-    <value>İletişim formunu aç</value>
-  </data>
-  <data name="p5finishHomepage.Text" xml:space="preserve">
-    <value>Ayrıntılı değişiklik kayıtlarını okuyabilir ve ana sayfamdaki yazılımımdan daha fazlasını kontrol edebilirsiniz.</value>
-  </data>
-  <data name="p5LinkHomepage.Text" xml:space="preserve">
-    <value>Ana sayfayı aç</value>
-  </data>
   <data name="p5finishTitle.Text" xml:space="preserve">
     <value>Kurulum bitti</value>
   </data>
@@ -296,12 +287,6 @@
   </data>
   <data name="buttonLanguageApply.Text" xml:space="preserve">
     <value>Uygula</value>
-  </data>
-  <data name="p1languageExtradetails.Text" xml:space="preserve">
-    <value>MØKSH'ı kendi dilinize çevirmeye yardımcı olmak istiyorsanız, bana ulaşmak için aşağıdaki bağlantıya tıklayın. Tüm yardımlar büyük beğeni topluyor!</value>
-  </data>
-  <data name="p1linkLabelContact.Text" xml:space="preserve">
-    <value>İletişim formunu aç</value>
   </data>
   <data name="label2.Text" xml:space="preserve">
     <value>MØKSH</value>

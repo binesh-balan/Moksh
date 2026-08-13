@@ -275,12 +275,6 @@ Atenção: a verificação pode demorar muito.</value>
   <data name="p1languageDesc.Text" xml:space="preserve">
     <value>Você pode forçar o MØKSH a usar uma localização específica se o idioma padrão estiver incorreto. Um reinício será executado para aplicar o novo idioma.</value>
   </data>
-  <data name="p1languageExtradetails.Text" xml:space="preserve">
-    <value>Se você está disposto a ajudar a traduzir MØKSH para o seu idioma, clique no link abaixo para entrar em contato comigo. Toda ajuda é bem-vinda!</value>
-  </data>
-  <data name="p1linkLabelContact.Text" xml:space="preserve">
-    <value>Abrir o formulário de contato</value>
-  </data>
   <data name="buttonMore.Text" xml:space="preserve">
     <value>Mais configurações</value>
   </data>
@@ -292,15 +286,6 @@ Atenção: a verificação pode demorar muito.</value>
   </data>
   <data name="p5finishContact.Text" xml:space="preserve">
     <value>Agora você pode começar a usar o MØKSH. Se você tiver alguma dúvida ou gostaria de sugerir um novo recurso, visite o link abaixo.</value>
-  </data>
-  <data name="p5LinkContact.Text" xml:space="preserve">
-    <value>Abrir o formulário de contato</value>
-  </data>
-  <data name="p5finishHomepage.Text" xml:space="preserve">
-    <value>Você pode ler os logs de mudanças detalhadas e confira mais do meu software na página inicial.</value>
-  </data>
-  <data name="p5LinkHomepage.Text" xml:space="preserve">
-    <value>Abrir a homepage</value>
   </data>
   <data name="buttonLanguageApply.Text" xml:space="preserve">
     <value>Aplicar</value>

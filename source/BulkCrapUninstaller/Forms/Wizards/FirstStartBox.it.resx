@@ -138,15 +138,6 @@
   <data name="p5finishContact.Text" xml:space="preserve">
     <value>Ora puoi iniziare ad usare MØKSH. Per qualunque domanda o suggerimenti di nuove funzionalità usa i collegamenti in basso.</value>
   </data>
-  <data name="p5LinkContact.Text" xml:space="preserve">
-    <value>Apri il modulo di contatto</value>
-  </data>
-  <data name="p5finishHomepage.Text" xml:space="preserve">
-    <value>Nella pagina web puoi leggere il dettaglio delle novità del programma e dare uno sguardo ad altre informazioni.</value>
-  </data>
-  <data name="p5LinkHomepage.Text" xml:space="preserve">
-    <value>Apri la pagina web del programma</value>
-  </data>
   <data name="p5finishTitle.Text" xml:space="preserve">
     <value>Configurazione programma completata</value>
   </data>
@@ -294,12 +285,6 @@ Se il disinstallatore originale non viene rilevato per rimuoverle bisogna usare 
   </data>
   <data name="buttonLanguageApply.Text" xml:space="preserve">
     <value>Applica</value>
-  </data>
-  <data name="p1languageExtradetails.Text" xml:space="preserve">
-    <value>Se sei disposto ad aiutarci nella traduzione di MØKSH nella tua lingua fai clic sul collegamento in basso per contattarmi. Ogni aiuto è fortemente apprezzato!</value>
-  </data>
-  <data name="p1linkLabelContact.Text" xml:space="preserve">
-    <value>Apri il modulo dei contatti</value>
   </data>
   <data name="label2.Text" xml:space="preserve">
     <value>MØKSH</value>

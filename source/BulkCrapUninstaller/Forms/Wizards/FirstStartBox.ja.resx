@@ -141,15 +141,6 @@
   <data name="p5finishContact.Text" xml:space="preserve">
     <value>これでMØKSHを使用開始できます。質問がある場合や新機能を提案したい場合は、以下のリンクを参照ください。</value>
   </data>
-  <data name="p5LinkContact.Text" xml:space="preserve">
-    <value>お問い合わせフォームを開く</value>
-  </data>
-  <data name="p5finishHomepage.Text" xml:space="preserve">
-    <value>詳細な変更履歴を読み、ホームページで他のソフトウェアを確認できます。</value>
-  </data>
-  <data name="p5LinkHomepage.Text" xml:space="preserve">
-    <value>ホームページを開く</value>
-  </data>
   <data name="p5finishTitle.Text" xml:space="preserve">
     <value>セットアップが完了しました</value>
   </data>
@@ -305,13 +296,6 @@ MØKSHは「手動でアンインストール」オプションを使用して�
   </data>
   <data name="buttonLanguageApply.Text" xml:space="preserve">
     <value>適用</value>
-  </data>
-  <data name="p1languageExtradetails.Text" xml:space="preserve">
-    <value>MØKSHをあなたの言語に翻訳するのを手伝っていただける場合は、以下のリンクをクリックして私に連絡してください。
-どんな助けでも歓迎します！</value>
-  </data>
-  <data name="p1linkLabelContact.Text" xml:space="preserve">
-    <value>お問い合わせフォームを開く</value>
   </data>
   <data name="label2.Text" xml:space="preserve">
     <value>MØKSH</value>

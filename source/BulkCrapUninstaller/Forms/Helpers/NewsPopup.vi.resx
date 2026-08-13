@@ -135,9 +135,6 @@
   <data name="linkLabel5.Text" xml:space="preserve">
     <value>Đọc tài liệu hướng dẫn</value>
   </data>
-  <data name="linkLabel6.Text" xml:space="preserve">
-    <value>Gửi phản hồi / Liên hệ với nhà phát triển</value>
-  </data>
   <data name="linkLabel7.Text" xml:space="preserve">
     <value>Quyên góp (PayPal, Bitcoin, Steam gifts)</value>
   </data>

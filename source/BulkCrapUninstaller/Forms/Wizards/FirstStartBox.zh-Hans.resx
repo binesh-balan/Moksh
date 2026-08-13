@@ -141,15 +141,6 @@
   <data name="p5finishContact.Text" xml:space="preserve">
     <value>现在可以开始使用MØKSH。如果你有任何问题或想建议一个新功能，请访问下面的链接。</value>
   </data>
-  <data name="p5LinkContact.Text" xml:space="preserve">
-    <value>打开联系窗体</value>
-  </data>
-  <data name="p5finishHomepage.Text" xml:space="preserve">
-    <value>你可以查看详细的更新日志，并在主页上查看我的其他软件。</value>
-  </data>
-  <data name="p5LinkHomepage.Text" xml:space="preserve">
-    <value>打开主页</value>
-  </data>
   <data name="p5finishTitle.Text" xml:space="preserve">
     <value>设置已完成</value>
   </data>
@@ -255,12 +246,6 @@
   </data>
   <data name="p2viewDetail.Text" xml:space="preserve">
     <value>在系统中找到的所有卸载程序都在主列表视图中。以下是浏览这些数据的一些方法:</value>
-  </data>
-  <data name="p1languageExtradetails.Text" xml:space="preserve">
-    <value>如果你愿意帮助将MØKSH翻译成你的语言，请单击下面的链接与我联系。非常感谢你的帮助！</value>
-  </data>
-  <data name="p1linkLabelContact.Text" xml:space="preserve">
-    <value>打开联系窗体</value>
   </data>
   <data name="label2.Text" xml:space="preserve">
     <value>MØKSH</value>

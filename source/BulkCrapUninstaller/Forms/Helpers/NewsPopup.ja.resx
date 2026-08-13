@@ -135,9 +135,6 @@
   <data name="linkLabel5.Text" xml:space="preserve">
     <value>ヘルプファイルを読む</value>
   </data>
-  <data name="linkLabel6.Text" xml:space="preserve">
-    <value>フィードバックを送信 / 開発者に連絡</value>
-  </data>
   <data name="linkLabel7.Text" xml:space="preserve">
     <value>寄付する（PayPal、Bitcoin、Steamギフト）</value>
   </data>

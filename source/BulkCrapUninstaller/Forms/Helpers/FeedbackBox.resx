@@ -517,7 +517,7 @@
     <value>7</value>
   </data>
   <data name="p1HelpDesc.Text" xml:space="preserve">
-    <value>You don't have to be a programmer to help! You can donate to speed up the updates, or translate MØKSH to your native language. All help is greatly appreciated, no matter how small!</value>
+    <value>You don't have to be a programmer to help! You can report a bug, suggest a feature, or translate MØKSH into your native language. All contributions are welcome, no matter how small.</value>
   </data>
   <data name="&gt;&gt;p1HelpDesc.Name" xml:space="preserve">
     <value>p1HelpDesc</value>

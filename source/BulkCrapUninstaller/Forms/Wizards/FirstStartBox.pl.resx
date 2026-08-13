@@ -132,15 +132,6 @@
   <data name="p5finishContact.Text" xml:space="preserve">
     <value>Teraz możesz zacząć używać MØKSH. Jeśli masz jakieś pytania lub sugestie dotyczące nowych funkcji programu kliknij poniższy link.</value>
   </data>
-  <data name="p5LinkContact.Text" xml:space="preserve">
-    <value>Otwórz formularz kontaktowy</value>
-  </data>
-  <data name="p5finishHomepage.Text" xml:space="preserve">
-    <value>Możesz przeczytać szczegółowy dziennik zmian i sprawdzić inne moje programy na stronie głównej.</value>
-  </data>
-  <data name="p5LinkHomepage.Text" xml:space="preserve">
-    <value>Otwórz stronę główną</value>
-  </data>
   <data name="p5finishTitle.Text" xml:space="preserve">
     <value>Konfiguracja została zakończona</value>
   </data>
@@ -283,12 +274,6 @@ jako "chronione"</value>
   </data>
   <data name="buttonLanguageApply.Text" xml:space="preserve">
     <value>Zastosuj</value>
-  </data>
-  <data name="p1languageExtradetails.Text" xml:space="preserve">
-    <value>Jeśli chcesz pomóc w tłumaczeniu MØKSH na swój język, kliknij na link poniżej i skontaktuj się ze mną. Każda pomoc jest mile widziana!</value>
-  </data>
-  <data name="p1linkLabelContact.Text" xml:space="preserve">
-    <value>Otwórz formularz kontaktowy</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Witaj w MØKSH</value>

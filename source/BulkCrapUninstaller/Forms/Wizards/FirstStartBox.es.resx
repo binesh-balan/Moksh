@@ -123,9 +123,6 @@
   <data name="buttonHelp.Text" xml:space="preserve">
     <value>Ver ayuda</value>
   </data>
-  <data name="p1languageExtradetails.Text" xml:space="preserve">
-    <value>Si usted está dispuesto a ayudar a traducir MØKSH a su idioma, haga clic en el enlace de abajo para ponerse en contacto conmigo. ¡Toda ayuda es muy apreciada!</value>
-  </data>
   <data name="p4netDesc4.Text" xml:space="preserve">
     <value>● Para capturar y cargar puntuaciones de aplicaciones</value>
   </data>
@@ -149,9 +146,6 @@
   </data>
   <data name="pCorViewinvalidComment.Text" xml:space="preserve">
     <value>Los desinstaladores inválidos están marcados en gris.</value>
-  </data>
-  <data name="p5LinkHomepage.Text" xml:space="preserve">
-    <value>Abrir la página de inicio</value>
   </data>
   <data name="p4netDesc1.Text" xml:space="preserve">
     <value>● Para buscar actualizaciones del programa.</value>
@@ -273,9 +267,6 @@ como "protegidos"</value>
   <data name="checkBoxUpdateSearch.Text" xml:space="preserve">
     <value>Buscar actualizaciones automáticamente al iniciar la aplicación</value>
   </data>
-  <data name="p1linkLabelContact.Text" xml:space="preserve">
-    <value>Abrir el formulario de contacto</value>
-  </data>
   <data name="p2viewAdd.Text" xml:space="preserve">
     <value>Los desinstaladores verificados están marcados en verde, los no verificados están en azul.
 Advertencia: La verificación puede tardar mucho tiempo.</value>
@@ -293,9 +284,6 @@ Advertencia: La verificación puede tardar mucho tiempo.</value>
   <data name="p2viewDetail1.Text" xml:space="preserve">
     <value>● Utilizar filtros y búsqueda de palabras clave (en todas las columnas)</value>
   </data>
-  <data name="p5LinkContact.Text" xml:space="preserve">
-    <value>Abrir el formulario de contacto</value>
-  </data>
   <data name="buttonExit.Text" xml:space="preserve">
     <value>Salir del asistente</value>
   </data>
@@ -308,9 +296,6 @@ del sistema"</value>
   </data>
   <data name="p1languageHeading.Text" xml:space="preserve">
     <value>Idioma seleccionado</value>
-  </data>
-  <data name="p5finishHomepage.Text" xml:space="preserve">
-    <value>Usted puede leer los registros de cambios detallados y echar un mejor vistazo de mi software en la página de inicio.</value>
   </data>
   <data name="labelProgress.Text" xml:space="preserve">
     <value>1 / 6</value>

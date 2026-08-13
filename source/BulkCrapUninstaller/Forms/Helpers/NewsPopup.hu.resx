@@ -138,9 +138,6 @@
   <data name="linkLabel5.Text" xml:space="preserve">
     <value>Sugófájl elolvasása</value>
   </data>
-  <data name="linkLabel6.Text" xml:space="preserve">
-    <value>Visszajelzés küldése / Kapcsolatfelvétel a fejlesztővel</value>
-  </data>
   <data name="linkLabel7.Text" xml:space="preserve">
     <value>Adományozás (PayPal, Bitcoin, Steam Ajándékkártyák)</value>
   </data>

@@ -149,9 +149,6 @@ Se teve um problema com o MØKSH, ou se quiser sugerir um novo recurso, consulte
   <data name="p1HelpHeading.Text" xml:space="preserve">
     <value>Quer ajudar?</value>
   </data>
-  <data name="p1HelpDesc.Text" xml:space="preserve">
-    <value>Não tem de ser um programador para ajudar! Pode doar para acelerar as actualizações ou traduzir o MØKSH para o seu idioma pátrio. Toda a ajuda é bem-vinda, por mais pequena que seja! </value>
-  </data>
   <data name="buttonTranslate.Text" xml:space="preserve">
     <value>Traduzir o MØKSH</value>
   </data>

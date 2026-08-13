@@ -551,7 +551,7 @@
     <value>1</value>
   </data>
   <data name="p5LinkContact.Text" xml:space="preserve">
-    <value>Open the contact form</value>
+    <value>Open a discussion</value>
   </data>
   <data name="&gt;&gt;p5LinkContact.Name" xml:space="preserve">
     <value>p5LinkContact</value>
@@ -584,7 +584,7 @@
     <value>2</value>
   </data>
   <data name="p5finishHomepage.Text" xml:space="preserve">
-    <value>You can read detailed change logs and check out more of my software on the homepage.</value>
+    <value>You can read detailed change logs and browse the source code on the project page.</value>
   </data>
   <data name="&gt;&gt;p5finishHomepage.Name" xml:space="preserve">
     <value>p5finishHomepage</value>
@@ -614,7 +614,7 @@
     <value>3</value>
   </data>
   <data name="p5LinkHomepage.Text" xml:space="preserve">
-    <value>Open the homepage</value>
+    <value>Open the project page</value>
   </data>
   <data name="&gt;&gt;p5LinkHomepage.Name" xml:space="preserve">
     <value>p5LinkHomepage</value>
@@ -2860,7 +2860,7 @@ Warning: Verification can take a long time.</value>
     <value>5</value>
   </data>
   <data name="p1languageExtradetails.Text" xml:space="preserve">
-    <value>If you are willing to help translate MØKSH to your language, click on the link below to contact me. All help is greatly appreciated!</value>
+    <value>If you would like to help translate MØKSH into your language, open a discussion using the link below. All contributions are welcome!</value>
   </data>
   <data name="&gt;&gt;p1languageExtradetails.Name" xml:space="preserve">
     <value>p1languageExtradetails</value>
@@ -2890,7 +2890,7 @@ Warning: Verification can take a long time.</value>
     <value>6</value>
   </data>
   <data name="p1linkLabelContact.Text" xml:space="preserve">
-    <value>Open the contact form</value>
+    <value>Open a discussion</value>
   </data>
   <data name="&gt;&gt;p1linkLabelContact.Name" xml:space="preserve">
     <value>p1linkLabelContact</value>

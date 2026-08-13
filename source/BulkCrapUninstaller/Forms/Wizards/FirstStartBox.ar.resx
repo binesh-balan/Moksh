@@ -189,9 +189,6 @@
   <data name="p2viewCertsTitle.Text" xml:space="preserve">
     <value>المثبتات المعتمدة</value>
   </data>
-  <data name="p1linkLabelContact.Text" xml:space="preserve">
-    <value>فتح نموذج جهة الاتصال</value>
-  </data>
   <data name="buttonMore.Text" xml:space="preserve">
     <value>اعدادات اضافيه</value>
   </data>
@@ -203,15 +200,6 @@
   </data>
   <data name="p5finishContact.Text" xml:space="preserve">
     <value>يمكنك الان البدء باستخدام المثبت. اذا كان لديك اي اسئله او ترغب في اقتراح ميزه جديده زيارة الرابط ادناه.</value>
-  </data>
-  <data name="p5LinkContact.Text" xml:space="preserve">
-    <value>فتح نموذج جهة الاتصال</value>
-  </data>
-  <data name="p5finishHomepage.Text" xml:space="preserve">
-    <value>يمكنك قراءه سجلات التغيير التفصيلي والتحقق من المزيد من برمجياتي علي الصفحة الرئيسية.</value>
-  </data>
-  <data name="p5LinkHomepage.Text" xml:space="preserve">
-    <value>افتح الصفحة الرئيسية</value>
   </data>
   <data name="buttonLanguageApply.Text" xml:space="preserve">
     <value>تطبيق</value>
@@ -308,8 +296,5 @@
   </data>
   <data name="p1languageDesc.Text" xml:space="preserve">
     <value>يمكنك اجبار المثبت على استخدام تعريب معين اذا كانت اللغة الافتراضية غير صحيحه. سيتم تنفيذ اعاده التشغيل لتطبيق اللغة الجديدة.</value>
-  </data>
-  <data name="p1languageExtradetails.Text" xml:space="preserve">
-    <value>اذا كنت على استعداد للمساعدة في ترجمه المثبت الى لغتك ، انقر على الرابط ادناه للاتصال بي. كل مساعده هو موضع تقدير كبير!</value>
   </data>
 </root>

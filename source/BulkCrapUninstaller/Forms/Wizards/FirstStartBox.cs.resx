@@ -135,15 +135,6 @@
   <data name="p5finishContact.Text" xml:space="preserve">
     <value>Nyní můžete začít používat MØKSH. Máte-li jakékoli dotazy nebo chcete-li navrhnout novou funkci navštivte odkaz níže.</value>
   </data>
-  <data name="p5LinkContact.Text" xml:space="preserve">
-    <value>Otevřete kontaktní formulář</value>
-  </data>
-  <data name="p5finishHomepage.Text" xml:space="preserve">
-    <value>Můžete si přečíst podrobné protokoly změn a podívejte se na více mého softwaru na domovské stránce.</value>
-  </data>
-  <data name="p5LinkHomepage.Text" xml:space="preserve">
-    <value>Otevřete domovskou stránku</value>
-  </data>
   <data name="p5finishTitle.Text" xml:space="preserve">
     <value>Instalační program byl dokončen</value>
   </data>
@@ -286,12 +277,6 @@ Upozornění: Ověření může trvat delší dobu.</value>
   </data>
   <data name="buttonLanguageApply.Text" xml:space="preserve">
     <value>Použít</value>
-  </data>
-  <data name="p1languageExtradetails.Text" xml:space="preserve">
-    <value>Pokud jste ochotni pomoci s překladem MØKSH do Vašeho jazyka, klikněte na odkaz níže, aby jste mě kontaktovali. Veškerou pomoc velmi ocenim!</value>
-  </data>
-  <data name="p1linkLabelContact.Text" xml:space="preserve">
-    <value>Otevřete kontaktní formulář</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Vítejte v MØKSH</value>

@@ -135,9 +135,6 @@
   <data name="linkLabel5.Text" xml:space="preserve">
     <value>Läs hjälpfilen</value>
   </data>
-  <data name="linkLabel6.Text" xml:space="preserve">
-    <value>Skicka feedback / Kontakta utvecklaren</value>
-  </data>
   <data name="linkLabel7.Text" xml:space="preserve">
     <value>Donera (PayPal, Bitcoin, Steam gifts)</value>
   </data>

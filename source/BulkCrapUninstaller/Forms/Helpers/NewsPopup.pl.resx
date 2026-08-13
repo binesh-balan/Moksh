@@ -123,9 +123,6 @@
   <data name="linkLabel7.Text" xml:space="preserve">
     <value>Darowizna (PayPal, Bitcoin, prezenty Steam)</value>
   </data>
-  <data name="linkLabel6.Text" xml:space="preserve">
-    <value>Wyślij Feedback / Kontakt z deweloperem</value>
-  </data>
   <data name="linkLabel5.Text" xml:space="preserve">
     <value>Przeczytaj plik pomocy</value>
   </data>
