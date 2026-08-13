@@ -1,0 +1,46 @@
+name: CI
+
+on:
+  push:
+    branches:
+    - master
+  pull_request:
+
+# Least privilege: this workflow only builds and uploads an artifact, so the token needs
+# nothing beyond reading the repository.
+permissions:
+  contents: read
+
+jobs:
+
+  build:
+    runs-on: windows-2022
+
+    permissions:
+      contents: read
+
+    steps:
+    # Actions are pinned to commit SHAs, not floating tags. A tag can be repointed by the action's
+    # maintainer (or by anyone who compromises that account), which would silently change what runs
+    # here. Version comments are for humans; the SHA is what is enforced.
+    - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+
+    - uses: microsoft/setup-msbuild@6fb02220983dee41ce7ae257b6f4d8f9bf5ed4ce # v2.0.0
+
+    - name: Restore
+      run: msbuild source\BulkCrapUninstaller.sln /t:Restore /p:Configuration=Release /p:Platform="Any CPU" /verbosity:minimal
+
+    - name: Build
+      run: >
+           msbuild source\BulkCrapUninstaller.sln /t:Publish /p:Configuration=Release /p:Platform="Any CPU" /verbosity:minimal
+           /p:filealignment=512 /p:DeployOnBuild=true /p:PublishSingleFile=False /p:SelfContained=False /p:PublishReadyToRun=false /p:PublishTrimmed=False
+           /p:PublishProtocol=FileSystem /p:PublishDir="${{ github.workspace }}\bin\publish"
+
+    - name: Build launcher
+      run: >
+           msbuild "source\BCU-launcher\BCU-launcher.vcxproj" /t:Build /p:Configuration=Release /p:Platform=Win32 /m /verbosity:minimal
+
+    - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+      with:
+        name: ${{ github.event.repository.name }}_${{ github.sha }}
+        path: bin\publish

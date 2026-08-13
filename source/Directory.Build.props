@@ -1,0 +1,76 @@
+<Project>
+	<PropertyGroup>
+		<Version>6.2</Version>
+
+		<Product>MØKSH</Product>
+		<AssemblyTitle>MØKSH</AssemblyTitle>
+		<Authors>Binesh Balan</Authors>
+		<Company>Binesh Balan</Company>
+		<Description>MØKSH - bulk application uninstaller for Windows. Based on Bulk Crap Uninstaller by Marcin Szeniak (Klocman), used under the Apache License 2.0.</Description>
+		<Copyright>Copyright © 2017-2026 Marcin Szeniak (Klocman). Modifications copyright © 2026 Binesh Balan. Licensed under Apache-2.0.</Copyright>
+
+		<Platforms>AnyCPU;x64;x86;ARM64</Platforms>
+		<TargetFramework>net8.0-windows10.0.18362.0</TargetFramework>
+		<TargetPlatformVersion>8.0</TargetPlatformVersion>
+
+		<OutputPath>..\..\bin\$(Configuration)\$(Platform)\</OutputPath>
+		<AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
+		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+
+		<Deterministic>true</Deterministic>
+
+		<!-- Restore must be reproducible. Without a lock file, package resolution depends on whatever
+		     feeds the build machine happens to have configured, and floating ranges pull in new
+		     versions with no commit recording the change. Run a restore once to generate the
+		     packages.lock.json files, commit them, then build CI with -p:RestoreLockedMode=true. -->
+		<RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
+
+		<UseWindowsForms>true</UseWindowsForms>
+		<ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>
+
+		<TargetZone>LocalIntranet</TargetZone>
+		<GenerateManifests>false</GenerateManifests>
+		<SignManifests>false</SignManifests>
+
+		<ApplicationManifest>..\app.manifest</ApplicationManifest>
+
+		<DebugSymbols>true</DebugSymbols>
+		<FileAlignment>512</FileAlignment>
+		
+		<UseAppHost>true</UseAppHost>
+		<SelfContained>false</SelfContained>
+	</PropertyGroup>
+	
+	<Import Project="HelperTools\HelperTools.projitems" Label="Shared" />
+
+	<PropertyGroup Condition=" '$(Platform)' == 'AnyCPU' ">
+		<RuntimeIdentifier></RuntimeIdentifier>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(Platform)'=='x86'">
+		<RuntimeIdentifier>win-x86</RuntimeIdentifier>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(Platform)'=='x64'">
+		<RuntimeIdentifier>win-x64</RuntimeIdentifier>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(Platform)'=='ARM64'">
+		<RuntimeIdentifier>win-arm64</RuntimeIdentifier>
+	</PropertyGroup>
+
+	<PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+		<!--<TreatWarningsAsErrors>true</TreatWarningsAsErrors>-->
+		<DebugType>embedded</DebugType>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)'=='Debug'">
+		<DebugType>full</DebugType>
+		<CodeAnalysisRuleSet>ExtendedDesignGuidelineRules.ruleset</CodeAnalysisRuleSet>
+		<CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
+	</PropertyGroup>
+	
+	<ItemGroup>
+		<Compile Include="..\GlobalAssemblyInfo.cs"/>
+		<None Include="..\Licence.licenseheader">
+			<Visible>False</Visible>
+		</None>
+	</ItemGroup>
+</Project>

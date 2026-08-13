@@ -1,0 +1,48 @@
+MØKSH PRIVACY POLICY
+
+MØKSH does not transmit any information about you, your machine, or your installed
+software to anyone. There is no telemetry backend, no crash reporting server, no
+analytics endpoint, and no update server that receives data about you.
+
+WHAT IS STORED, LOCALLY ONLY
+----------------------------
+MØKSH writes these files alongside its own executable. They never leave your machine,
+and you may inspect or delete any of them at any time:
+
+  UsageStatistics.xml   Counts of which parts of the interface you have used, plus the
+                        application version, Windows version, locale and installed .NET
+                        versions. Used to populate the in-app statistics view.
+  InfoCache.xml         Cached details of detected applications, to speed up scanning.
+  CertCache.xml         Cached code-signing verification results.
+  CustomNotes.xml       Notes you have attached to applications yourself.
+  Moksh.settings        Your settings.
+  *.log                 Diagnostic logs. These contain file paths, which on a Windows
+                        system generally include your account name. They are local only.
+
+A random installation identifier is generated on first run and stored in the settings
+file. It is not derived from your hardware, your Windows account, or anything else that
+identifies you, and it is discarded if you reset your settings.
+
+NETWORK ACCESS
+--------------
+MØKSH makes network requests only when you ask it to:
+
+  - "Look up online" opens your default web browser with a search for the application
+    name you selected. MØKSH does not perform the request itself.
+  - The update check, if you enable it (off by default), makes a single request to
+    github.com to read the latest published version number. It sends no information
+    about you or your machine.
+
+Nothing else contacts the network.
+
+CHANGES FROM THE ORIGINAL
+-------------------------
+MØKSH is a modified distribution of Bulk Crap Uninstaller. Upstream transmitted crash
+reports, usage statistics and application ratings to a server operated by the original
+author over unencrypted HTTP, keyed by an identifier derived from the Windows account
+SID and network adapter MAC addresses. That functionality has been removed in its
+entirety. This policy describes MØKSH only and does not apply to upstream Bulk Crap
+Uninstaller.
+
+If this policy ever changes, the change will be recorded in the project's release notes
+rather than applied silently.

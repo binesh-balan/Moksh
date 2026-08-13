@@ -1,0 +1,324 @@
+﻿; Tested with innosetup-6.4.3
+
+; Normal: include self-contained binaries for both x86 and x64
+; Light: include only AnyCPU binaries and automatically download net8 if needed
+#define Light
+
+; =============================================================================
+
+#define MyAppName          "MØKSH"
+#define MyAppNameShort     "Moksh"
+#define MyAppPublisher     "Binesh Balan"
+#define MyAppURL           "https://github.com/binesh-balan/Moksh"
+; Attribution only - never used as a support URL. MOKSH support goes to MyAppURL above.
+#define MyUpstreamURL      "https://github.com/Klocman/Bulk-Crap-Uninstaller"
+#define MyAppExeName       "Moksh.exe"
+#define CurrentYear        GetDateTimeString('yyyy','','')
+#define MyAppCopyright     "Copyright " + CurrentYear + " " + MyAppPublisher + ". Based on Bulk Crap Uninstaller by Marcin Szeniak (Klocman), Apache-2.0."
+
+#ifdef Light
+#define InputDir           "..\bin\publish-AnyCPU-net8.0"
+#define MainExePath        InputDir+'\'+MyAppExeName
+; Downloading net8 is only necessary in light mode
+#include "CodeDependencies.iss"
+#else
+#define InputDir           "..\bin\publish"
+#define MainExePath        InputDir+'\win-x64\'+MyAppExeName
+; Portable page only works in normal mode
+#include "PortablePage.iss"
+#endif
+
+#define                    MajorVersion    
+#define                    MinorVersion    
+#define                    RevisionVersion    
+#define                    BuildVersion    
+#define TempVersion        ParseVersion(MainExePath, MajorVersion, MinorVersion, RevisionVersion, BuildVersion)
+#define MyAppVersion       str(MajorVersion) + "." + str(MinorVersion) + "." + str(RevisionVersion) + "." + str(BuildVersion)
+#define MyAppVersionShort  str(MajorVersion) + "." + str(MinorVersion) + "." + str(RevisionVersion)
+
+
+[Setup]
+; New AppId: MOKSH is a separate product and must not share an uninstall registry key with
+; upstream BCUninstaller, or installing one would offer to uninstall or upgrade the other.
+; This value must stay in sync with Program.GetInstalledRegKey().
+AppId={{edf1b036-2b58-45ab-a933-88b908e026f8}
+AppName={#MyAppName}
+AppVersion={#MyAppVersion}
+AppVerName={#MyAppName} {#MyAppVersion}
+
+AppPublisher={#MyAppPublisher}
+AppPublisherURL={#MyAppURL}
+AppSupportURL={#MyAppURL}/issues
+AppUpdatesURL={#MyAppURL}/releases
+
+; Install path uses the ASCII short name - "Ø" in a filesystem path trips up scripts, log parsers
+; and deployment tooling. The display name keeps the stylised form everywhere users see it.
+DefaultDirName={commonpf}\{#MyAppNameShort}
+DefaultGroupName={#MyAppName}
+UninstallDisplayIcon={app}\{#MyAppExeName}
+
+WizardImageFile=assets\bigImage.bmp
+WizardSmallImageFile=assets\smallImage.bmp
+SetupIconFile=assets\logo.ico
+
+AllowNoIcons=yes
+DisableDirPage=no
+LicenseFile={#InputDir}\Licence.txt
+OutputBaseFilename={#MyAppNameShort}_{#MyAppVersionShort}_setup
+
+Compression=lzma2/ultra
+SolidCompression=yes
+LZMAUseSeparateProcess=yes
+LZMADictionarySize=548570
+LZMANumFastBytes=273
+LZMANumBlockThreads=8
+
+PrivilegesRequired=admin
+ArchitecturesAllowed=x86compatible
+ArchitecturesInstallIn64BitMode=x64compatible
+
+VersionInfoCompany={#MyAppPublisher}
+;VersionInfoDescription=desc
+VersionInfoCopyright={#MyAppCopyright}
+VersionInfoProductName={#MyAppName}
+VersionInfoProductTextVersion={#MyAppVersion}
+VersionInfoTextVersion={#MyAppVersion}
+
+[Languages]
+Name: "en"; MessagesFile: "compiler:Default.isl"
+Name: "fr"; MessagesFile: "compiler:Languages\French.isl"
+Name: "pl"; MessagesFile: "compiler:Languages\Polish.isl"
+Name: "de"; MessagesFile: "compiler:Languages\German.isl"
+Name: "sl"; MessagesFile: "compiler:Languages\Slovenian.isl"
+Name: "nl"; MessagesFile: "compiler:Languages\Dutch.isl"
+Name: "es"; MessagesFile: "compiler:Languages\Spanish.isl"
+Name: "bpt"; MessagesFile: "compiler:Languages\BrazilianPortuguese.isl"
+Name: "ru"; MessagesFile: "compiler:Languages\Russian.isl"
+Name: "it"; MessagesFile: "compiler:Languages\Italian.isl"
+Name: "hu"; MessagesFile: "compiler:Languages\Hungarian.isl"
+Name: "tr"; MessagesFile: "compiler:Languages\Turkish.isl"
+Name: "vi"; MessagesFile: "lang\Vietnamese.isl"
+Name: "uk"; MessagesFile: "lang\Ukrainian.isl"
+Name: "hi"; MessagesFile: "lang\Hindi.isl"
+Name: "zh_cn"; MessagesFile: "lang\ChineseSimplified.isl"
+
+[Components]
+Name: "main"; Description: "{cm:MainFiles}"; Types: full compact custom; Flags: fixed
+Name: "lang"; Description: "{cm:ExtraLanguages}"; Types: full
+
+[Files]
+#ifdef Light
+
+; Need to do this to separate the language resource folders from main app file
+Source: "{#InputDir}\*";                DestDir: "{app}\";          Components: main; Flags: ignoreversion recursesubdirs; Excludes: "CleanLogs.bat,\??\*,\??-??\*,\??-????\*";
+; If installing languages, copy everything
+Source: "{#InputDir}\*";                DestDir: "{app}\";          Components: lang; Flags: ignoreversion recursesubdirs; Excludes: "CleanLogs.bat";
+
+; Always install the translation matching the language chosen during setup, even when the
+; "Extra Languages" component is deselected. The compiler deduplicates identical source
+; files, so these entries do not increase the installer size.
+Source: "{#InputDir}\fr\*";      DestDir: "{app}\fr";      Components: not lang; Languages: fr;    Flags: ignoreversion recursesubdirs skipifsourcedoesntexist
+Source: "{#InputDir}\pl\*";      DestDir: "{app}\pl";      Components: not lang; Languages: pl;    Flags: ignoreversion recursesubdirs skipifsourcedoesntexist
+Source: "{#InputDir}\de\*";      DestDir: "{app}\de";      Components: not lang; Languages: de;    Flags: ignoreversion recursesubdirs skipifsourcedoesntexist
+Source: "{#InputDir}\sl\*";      DestDir: "{app}\sl";      Components: not lang; Languages: sl;    Flags: ignoreversion recursesubdirs skipifsourcedoesntexist
+Source: "{#InputDir}\nl\*";      DestDir: "{app}\nl";      Components: not lang; Languages: nl;    Flags: ignoreversion recursesubdirs skipifsourcedoesntexist
+Source: "{#InputDir}\es\*";      DestDir: "{app}\es";      Components: not lang; Languages: es;    Flags: ignoreversion recursesubdirs skipifsourcedoesntexist
+Source: "{#InputDir}\pt\*";      DestDir: "{app}\pt";      Components: not lang; Languages: bpt;   Flags: ignoreversion recursesubdirs skipifsourcedoesntexist
+Source: "{#InputDir}\pt-BR\*";   DestDir: "{app}\pt-BR";   Components: not lang; Languages: bpt;   Flags: ignoreversion recursesubdirs skipifsourcedoesntexist
+Source: "{#InputDir}\ru\*";      DestDir: "{app}\ru";      Components: not lang; Languages: ru;    Flags: ignoreversion recursesubdirs skipifsourcedoesntexist
+Source: "{#InputDir}\it\*";      DestDir: "{app}\it";      Components: not lang; Languages: it;    Flags: ignoreversion recursesubdirs skipifsourcedoesntexist
+Source: "{#InputDir}\hu\*";      DestDir: "{app}\hu";      Components: not lang; Languages: hu;    Flags: ignoreversion recursesubdirs skipifsourcedoesntexist
+Source: "{#InputDir}\tr\*";      DestDir: "{app}\tr";      Components: not lang; Languages: tr;    Flags: ignoreversion recursesubdirs skipifsourcedoesntexist
+Source: "{#InputDir}\vi\*";      DestDir: "{app}\vi";      Components: not lang; Languages: vi;    Flags: ignoreversion recursesubdirs skipifsourcedoesntexist
+Source: "{#InputDir}\zh-Hans\*"; DestDir: "{app}\zh-Hans"; Components: not lang; Languages: zh_cn; Flags: ignoreversion recursesubdirs skipifsourcedoesntexist
+Source: "{#InputDir}\zh-CN\*";   DestDir: "{app}\zh-CN";   Components: not lang; Languages: zh_cn; Flags: ignoreversion recursesubdirs skipifsourcedoesntexist
+
+#else 
+
+Source: "{#InputDir}\*";                        DestDir: "{app}"; Components: main; Flags: ignoreversion; Check: IsPortable or not IsPortable
+Source: "{#InputDir}\Moksh_manual.html";          DestDir: "{app}"; Components: main; Flags: ignoreversion isreadme; Check: IsPortable or not IsPortable
+
+; Need to do this to separate the language resource folders from main app files
+Source: "{#InputDir}\win-x64\*";                DestDir: "{app}\win-x64";           Components: main; Flags: ignoreversion; Excludes: "CleanLogs.bat"; Check: Is64BitInstallMode or IsPortable
+Source: "{#InputDir}\win-x64\Resources\*";      DestDir: "{app}\win-x64\Resources"; Components: main; Flags: ignoreversion recursesubdirs;             Check: Is64BitInstallMode or IsPortable
+Source: "{#InputDir}\win-x86\*";                DestDir: "{app}\win-x86";           Components: main; Flags: ignoreversion; Excludes: "CleanLogs.bat"; Check: not Is64BitInstallMode or IsPortable
+Source: "{#InputDir}\win-x86\Resources\*";      DestDir: "{app}\win-x86\Resources"; Components: main; Flags: ignoreversion recursesubdirs;             Check: not Is64BitInstallMode or IsPortable
+
+; If installing languages, copy everything
+Source: "{#InputDir}\win-x64\*";                DestDir: "{app}\win-x64"; Components: lang; Flags: ignoreversion recursesubdirs; Excludes: "CleanLogs.bat"; Check: Is64BitInstallMode or IsPortable
+Source: "{#InputDir}\win-x86\*";                DestDir: "{app}\win-x86"; Components: lang; Flags: ignoreversion recursesubdirs; Excludes: "CleanLogs.bat"; Check: not Is64BitInstallMode or IsPortable
+
+; Always install the translation matching the language chosen during setup, even when the
+; "Extra Languages" component is deselected. The compiler deduplicates identical source
+; files, so these entries do not increase the installer size.
+Source: "{#InputDir}\win-x64\fr\*";      DestDir: "{app}\win-x64\fr";      Components: not lang; Languages: fr;    Flags: ignoreversion recursesubdirs skipifsourcedoesntexist; Check: Is64BitInstallMode or IsPortable
+Source: "{#InputDir}\win-x64\pl\*";      DestDir: "{app}\win-x64\pl";      Components: not lang; Languages: pl;    Flags: ignoreversion recursesubdirs skipifsourcedoesntexist; Check: Is64BitInstallMode or IsPortable
+Source: "{#InputDir}\win-x64\de\*";      DestDir: "{app}\win-x64\de";      Components: not lang; Languages: de;    Flags: ignoreversion recursesubdirs skipifsourcedoesntexist; Check: Is64BitInstallMode or IsPortable
+Source: "{#InputDir}\win-x64\sl\*";      DestDir: "{app}\win-x64\sl";      Components: not lang; Languages: sl;    Flags: ignoreversion recursesubdirs skipifsourcedoesntexist; Check: Is64BitInstallMode or IsPortable
+Source: "{#InputDir}\win-x64\nl\*";      DestDir: "{app}\win-x64\nl";      Components: not lang; Languages: nl;    Flags: ignoreversion recursesubdirs skipifsourcedoesntexist; Check: Is64BitInstallMode or IsPortable
+Source: "{#InputDir}\win-x64\es\*";      DestDir: "{app}\win-x64\es";      Components: not lang; Languages: es;    Flags: ignoreversion recursesubdirs skipifsourcedoesntexist; Check: Is64BitInstallMode or IsPortable
+Source: "{#InputDir}\win-x64\pt\*";      DestDir: "{app}\win-x64\pt";      Components: not lang; Languages: bpt;   Flags: ignoreversion recursesubdirs skipifsourcedoesntexist; Check: Is64BitInstallMode or IsPortable
+Source: "{#InputDir}\win-x64\pt-BR\*";   DestDir: "{app}\win-x64\pt-BR";   Components: not lang; Languages: bpt;   Flags: ignoreversion recursesubdirs skipifsourcedoesntexist; Check: Is64BitInstallMode or IsPortable
+Source: "{#InputDir}\win-x64\ru\*";      DestDir: "{app}\win-x64\ru";      Components: not lang; Languages: ru;    Flags: ignoreversion recursesubdirs skipifsourcedoesntexist; Check: Is64BitInstallMode or IsPortable
+Source: "{#InputDir}\win-x64\it\*";      DestDir: "{app}\win-x64\it";      Components: not lang; Languages: it;    Flags: ignoreversion recursesubdirs skipifsourcedoesntexist; Check: Is64BitInstallMode or IsPortable
+Source: "{#InputDir}\win-x64\hu\*";      DestDir: "{app}\win-x64\hu";      Components: not lang; Languages: hu;    Flags: ignoreversion recursesubdirs skipifsourcedoesntexist; Check: Is64BitInstallMode or IsPortable
+Source: "{#InputDir}\win-x64\tr\*";      DestDir: "{app}\win-x64\tr";      Components: not lang; Languages: tr;    Flags: ignoreversion recursesubdirs skipifsourcedoesntexist; Check: Is64BitInstallMode or IsPortable
+Source: "{#InputDir}\win-x64\vi\*";      DestDir: "{app}\win-x64\vi";      Components: not lang; Languages: vi;    Flags: ignoreversion recursesubdirs skipifsourcedoesntexist; Check: Is64BitInstallMode or IsPortable
+Source: "{#InputDir}\win-x64\zh-Hans\*"; DestDir: "{app}\win-x64\zh-Hans"; Components: not lang; Languages: zh_cn; Flags: ignoreversion recursesubdirs skipifsourcedoesntexist; Check: Is64BitInstallMode or IsPortable
+Source: "{#InputDir}\win-x64\zh-CN\*";   DestDir: "{app}\win-x64\zh-CN";   Components: not lang; Languages: zh_cn; Flags: ignoreversion recursesubdirs skipifsourcedoesntexist; Check: Is64BitInstallMode or IsPortable
+Source: "{#InputDir}\win-x86\fr\*";      DestDir: "{app}\win-x86\fr";      Components: not lang; Languages: fr;    Flags: ignoreversion recursesubdirs skipifsourcedoesntexist; Check: not Is64BitInstallMode or IsPortable
+Source: "{#InputDir}\win-x86\pl\*";      DestDir: "{app}\win-x86\pl";      Components: not lang; Languages: pl;    Flags: ignoreversion recursesubdirs skipifsourcedoesntexist; Check: not Is64BitInstallMode or IsPortable
+Source: "{#InputDir}\win-x86\de\*";      DestDir: "{app}\win-x86\de";      Components: not lang; Languages: de;    Flags: ignoreversion recursesubdirs skipifsourcedoesntexist; Check: not Is64BitInstallMode or IsPortable
+Source: "{#InputDir}\win-x86\sl\*";      DestDir: "{app}\win-x86\sl";      Components: not lang; Languages: sl;    Flags: ignoreversion recursesubdirs skipifsourcedoesntexist; Check: not Is64BitInstallMode or IsPortable
+Source: "{#InputDir}\win-x86\nl\*";      DestDir: "{app}\win-x86\nl";      Components: not lang; Languages: nl;    Flags: ignoreversion recursesubdirs skipifsourcedoesntexist; Check: not Is64BitInstallMode or IsPortable
+Source: "{#InputDir}\win-x86\es\*";      DestDir: "{app}\win-x86\es";      Components: not lang; Languages: es;    Flags: ignoreversion recursesubdirs skipifsourcedoesntexist; Check: not Is64BitInstallMode or IsPortable
+Source: "{#InputDir}\win-x86\pt\*";      DestDir: "{app}\win-x86\pt";      Components: not lang; Languages: bpt;   Flags: ignoreversion recursesubdirs skipifsourcedoesntexist; Check: not Is64BitInstallMode or IsPortable
+Source: "{#InputDir}\win-x86\pt-BR\*";   DestDir: "{app}\win-x86\pt-BR";   Components: not lang; Languages: bpt;   Flags: ignoreversion recursesubdirs skipifsourcedoesntexist; Check: not Is64BitInstallMode or IsPortable
+Source: "{#InputDir}\win-x86\ru\*";      DestDir: "{app}\win-x86\ru";      Components: not lang; Languages: ru;    Flags: ignoreversion recursesubdirs skipifsourcedoesntexist; Check: not Is64BitInstallMode or IsPortable
+Source: "{#InputDir}\win-x86\it\*";      DestDir: "{app}\win-x86\it";      Components: not lang; Languages: it;    Flags: ignoreversion recursesubdirs skipifsourcedoesntexist; Check: not Is64BitInstallMode or IsPortable
+Source: "{#InputDir}\win-x86\hu\*";      DestDir: "{app}\win-x86\hu";      Components: not lang; Languages: hu;    Flags: ignoreversion recursesubdirs skipifsourcedoesntexist; Check: not Is64BitInstallMode or IsPortable
+Source: "{#InputDir}\win-x86\tr\*";      DestDir: "{app}\win-x86\tr";      Components: not lang; Languages: tr;    Flags: ignoreversion recursesubdirs skipifsourcedoesntexist; Check: not Is64BitInstallMode or IsPortable
+Source: "{#InputDir}\win-x86\vi\*";      DestDir: "{app}\win-x86\vi";      Components: not lang; Languages: vi;    Flags: ignoreversion recursesubdirs skipifsourcedoesntexist; Check: not Is64BitInstallMode or IsPortable
+Source: "{#InputDir}\win-x86\zh-Hans\*"; DestDir: "{app}\win-x86\zh-Hans"; Components: not lang; Languages: zh_cn; Flags: ignoreversion recursesubdirs skipifsourcedoesntexist; Check: not Is64BitInstallMode or IsPortable
+Source: "{#InputDir}\win-x86\zh-CN\*";   DestDir: "{app}\win-x86\zh-CN";   Components: not lang; Languages: zh_cn; Flags: ignoreversion recursesubdirs skipifsourcedoesntexist; Check: not Is64BitInstallMode or IsPortable
+
+; Only copy the cleaning script if installing as portable
+Source: "{#InputDir}\win-x64\CleanLogs.bat";    DestDir: "{app}\win-x64"; Components: main; Flags: ignoreversion; Check: IsPortable
+Source: "{#InputDir}\win-x86\CleanLogs.bat";    DestDir: "{app}\win-x86"; Components: main; Flags: ignoreversion; Check: IsPortable
+
+#endif
+
+[InstallDelete]
+Name: {app}\BCU-launcher.exe; Type: files
+; Make sure there are no old stale versions. Settings file is kept in the root directory so it will survive.
+Name: {app}\win-x64; Type: filesandordirs
+Name: {app}\win-x86; Type: filesandordirs
+
+[UninstallDelete]
+; Remove files generated by BCU itself. Installed files are removed automatically by Inno Setup.
+Type: files; Name: "{app}\CleanLogs.bat"
+Type: files; Name: "{app}\Moksh.settings"
+Type: files; Name: "{app}\*.log"
+Type: files; Name: "{app}\Exception_*.zip"
+Type: files; Name: "{app}\CustomNotes.xml"
+Type: files; Name: "{app}\InfoCache.xml"
+Type: files; Name: "{app}\CertCache.xml"
+Type: files; Name: "{app}\UsageStatistics.xml"
+Type: files; Name: "{app}\RatingCashe*"
+Type: files; Name: "{app}\*\CleanLogs.bat"
+Type: files; Name: "{app}\*\Moksh.settings"
+Type: files; Name: "{app}\*\*.log"
+Type: files; Name: "{app}\*\Exception_*.zip"
+Type: files; Name: "{app}\*\CustomNotes.xml"
+Type: files; Name: "{app}\*\InfoCache.xml"
+Type: files; Name: "{app}\*\CertCache.xml"
+Type: files; Name: "{app}\*\UsageStatistics.xml"
+Type: files; Name: "{app}\*\RatingCashe*"
+
+[Tasks]
+Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; Check: IsNotPortable
+
+[Icons]
+Name: "{group}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; Check: IsNotPortable;
+Name: "{group}\{cm:UninstallProgram,{#MyAppName}}"; Filename: "{uninstallexe}"; Check: IsNotPortable;
+Name: "{commondesktop}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; Tasks: desktopicon; Check: IsNotPortable;
+
+[Run]
+Filename: "{app}\{#MyAppExeName}"; Description: "{cm:LaunchProgram,{#StringChange(MyAppName, '&', '&&')}}"; Flags: nowait postinstall skipifsilent shellexec
+
+#ifdef Light
+[Code]
+function IsPortable(): Boolean;
+begin
+  Result := False
+end;
+function IsNotPortable(): Boolean;
+begin
+  Result := True
+end;
+
+function InitializeSetup: Boolean;
+begin
+  Dependency_AddDotNet80Desktop;
+  Result := True;
+end;
+#endif
+
+// The same as CleanLogs.bat except ran at the end of uninstallation
+// TODO: Test, fix issues and enable
+//procedure DeinitializeUninstall();
+//var
+//  AppDataSafe: string;
+//  MicrosoftPath: string;
+//  SettingsDir: string;
+//  ResultCode: Integer;
+//  Cmd: string;
+//begin
+//  // Choose LOCALAPPDATA if available, otherwise fall back to APPDATA
+//  if DirExists(ExpandConstant('{localappdata}')) then
+//    AppDataSafe := ExpandConstant('{localappdata}')
+//  else
+//    AppDataSafe := ExpandConstant('{userappdata}');
+//
+//  // Delete .NET Assembly Usage Logs under %LOCALAPPDATA%\Microsoft (recursively)
+//  MicrosoftPath := AppDataSafe + '\\Microsoft';
+//  if DirExists(MicrosoftPath) then
+//  begin
+//    Cmd := '/C del /f /s Moksh.exe.log SteamHelper.exe.log StoreAppHelper.exe.log UninstallerAutomatizer.exe.log UpdateHelper.exe.log';
+//    Exec(ExpandConstant('{cmd}'), Cmd, MicrosoftPath, SW_HIDE, ewWaitUntilTerminated, ResultCode);
+//  end;
+//
+//  // Remove settings directories created by .NET under %LOCALAPPDATA%\\Binesh_Balan\\Moksh*
+//  SettingsDir := AppDataSafe + '\\Binesh_Balan';
+//  if DirExists(SettingsDir) then
+//  begin
+//    // Remove matching directories
+//    Cmd := '/C for /d %G in ("' + SettingsDir + '\\Moksh*") do rd /s /q "%G"';
+//    Exec(ExpandConstant('{cmd}'), Cmd, '', SW_HIDE, ewWaitUntilTerminated, ResultCode);
+//
+//    // If the settings dir is now empty, remove it
+//    try
+//      if RemoveDir(SettingsDir) then
+//      begin
+//        // removed
+//      end;
+//    except
+//      // ignore
+//    end;
+//  end;
+//end;
+
+[CustomMessages] 
+en.MainFiles=Main Files
+pl.MainFiles=Główne pliki
+fr.MainFiles=Principaux fichiers
+de.MainFiles=Haupt Dateien 
+hu.MainFiles=Fő fájlok
+sl.MainFiles=Glavne datoteke
+nl.MainFiles=Hoofdbestanden
+es.MainFiles=Archivos principales
+bpt.MainFiles=Arquivos principais
+ru.MainFiles=Основные файлы программы
+it.MainFiles=File programma
+vi.MainFiles=Các tập tin chương trình chính
+uk.MainFiles=Основні файли
+tr.MainFiles=Ana Dosyalar
+zh_cn.MainFiles=主文件
+hi.MainFiles=मुख्य फ़ाइलें
+
+en.ExtraLanguages=Extra Languages
+pl.ExtraLanguages=Dodatkowe języki
+fr.ExtraLanguages=Langues supplémentaires
+de.ExtraLanguages=Zusätzliche Sprachen 
+hu.ExtraLanguages=Extra nyelvek
+sl.ExtraLanguages=Dodatni jeziki
+nl.ExtraLanguages=Extra talen
+es.ExtraLanguages=Idiomas adicionales
+bpt.ExtraLanguages=Línguas extras
+ru.ExtraLanguages=Дополнительные языки
+it.ExtraLanguages=Lingue aggiuntive
+vi.ExtraLanguages=Ngôn ngữ bổ sung
+uk.ExtraLanguages=Додаткові мови
+tr.ExtraLanguages=İlave Diller
+zh_cn.ExtraLanguages=其他语言
+hi.ExtraLanguages=अतिरिक्त भाषाएँ

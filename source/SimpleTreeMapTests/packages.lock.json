@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "dependencies": {
+    "net8.0-windows10.0.18362": {
+      "objectlistview": {
+        "type": "Project"
+      },
+      "simpletreemap": {
+        "type": "Project",
+        "dependencies": {
+          "ObjectListView": "[6.2.0, )"
+        }
+      }
+    }
+  }
+}
