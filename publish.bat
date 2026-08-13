@@ -1,4 +1,4 @@
-@echo off
+﻿@echo off
 cls
 
 rem Release Debug
@@ -67,6 +67,13 @@ call :publishProjects
 if errorlevel 1 (pause & exit /b 1)
 
 IF %config%==Release (del /f /s /q "%target%\*.pdb")
+
+rem --- Authenticode signing -------------------------------------
+rem Signs the AnyCPU payload. Skips binaries that already carry a valid
+rem third-party signature (notably es.exe, signed by voidtools).
+rem Pass a different thumbprint to sign.ps1 to use a real CA certificate.
+powershell -NoProfile -ExecutionPolicy Bypass -File "%CD%\sign.ps1" -Path "%target%"
+if errorlevel 1 (echo Signing failed & pause & exit /b 1)
 
 echo ====== Publishing finished! ======
 pause
