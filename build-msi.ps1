@@ -11,6 +11,19 @@
     binaries. The MSI itself is signed afterwards; an unsigned installer wrapping
     signed files is the weak link, since the installer is what the user runs.
 
+.PARAMETER SelfContained
+    Bundle the .NET runtime into the package, producing an MSI with no
+    prerequisites (~60-70 MB instead of ~9 MB).
+
+    Both variants share an UpgradeCode, so they are mutually exclusive by design:
+    installing one replaces the other rather than sitting alongside it. They are
+    the same product in two packagings, and having both on a machine would mean
+    two copies of MOKSH fighting over the same install directory and registry key.
+
+    Trade-off: a self-contained build owns its runtime's CVEs. When Microsoft
+    patches .NET, a framework-dependent install picks it up automatically; a
+    self-contained one needs a rebuild and redeploy.
+
 .PARAMETER SkipSigning
     Build without signing. Useful on a machine without the certificate.
 
@@ -19,6 +32,9 @@
 
 .EXAMPLE
     .\build-msi.ps1
+
+.EXAMPLE
+    .\build-msi.ps1 -SelfContained
 
 .NOTES
     Requires the .NET Framework MSBuild from Visual Studio - `dotnet build` cannot
@@ -33,6 +49,7 @@
 #>
 [CmdletBinding()]
 param(
+    [switch] $SelfContained,
     [switch] $SkipSigning,
     [string] $Thumbprint = 'ED6A1D7398ABE80493FF1A3848EA2C1B217B233C',
     [string] $Version = '6.2'
@@ -53,19 +70,44 @@ function Find-MSBuild {
 }
 
 $msbuild = Find-MSBuild
-$stage   = Join-Path $root 'bin\release-stage'
-$msi     = Join-Path $root "bin\Moksh_${Version}_x64.msi"
 
-Write-Host "==> Publishing" -ForegroundColor Cyan
+if ($SelfContained) {
+    $stage = Join-Path $root 'bin\release-stage-sc'
+    $msi   = Join-Path $root "bin\Moksh_${Version}_x64_selfcontained.msi"
+    $label = 'self-contained (bundles .NET runtime)'
+} else {
+    $stage = Join-Path $root 'bin\release-stage'
+    $msi   = Join-Path $root "bin\Moksh_${Version}_x64.msi"
+    $label = 'framework-dependent (requires .NET 8 Desktop Runtime)'
+}
+
+Write-Host "==> Building $label" -ForegroundColor Cyan
+Write-Host "==> Publishing"    -ForegroundColor Cyan
+
 $projects = Get-ChildItem (Join-Path $root 'source') -Filter *.csproj -Recurse |
             Where-Object { (Get-Content $_.FullName -Raw) -match 'exe</OutputType>' -and $_.Name -notmatch 'Tests' }
 
+# All projects publish into ONE directory. For the self-contained build that means the
+# runtime is laid down once and overwritten by each project rather than duplicated
+# ten times, which is why the result is ~150 MB and not ~700 MB.
 foreach ($p in $projects) {
-    $errs = & $msbuild $p.FullName /restore /m /t:Publish `
-        /p:Configuration=Release /p:Platform="Any CPU" /p:PublishDir="$stage" `
-        /p:SelfContained=False /p:PublishSingleFile=False /p:PublishReadyToRun=false `
-        /p:PublishTrimmed=False /p:PublishProtocol=FileSystem /verbosity:quiet 2>&1 |
-        Select-String ': error'
+    $args = @(
+        $p.FullName, '/restore', '/m', '/t:Publish',
+        '/p:Configuration=Release', '/p:Platform=Any CPU', "/p:PublishDir=$stage",
+        '/p:PublishSingleFile=False', '/p:PublishReadyToRun=false',
+        '/p:PublishTrimmed=False', '/p:PublishProtocol=FileSystem', '/verbosity:quiet'
+    )
+    if ($SelfContained) {
+        # RuntimeIdentifier is required for a self-contained publish. Command-line
+        # properties are global and win over Directory.Build.props, which blanks the
+        # RID for the AnyCPU platform.
+        $args += '/p:SelfContained=true'
+        $args += '/p:RuntimeIdentifier=win-x64'
+    } else {
+        $args += '/p:SelfContained=False'
+    }
+
+    $errs = & $msbuild @args 2>&1 | Select-String ': error'
     if ($errs) { throw "Publish failed for $($p.Name): $($errs[0])" }
 }
 
@@ -96,8 +138,14 @@ if (-not $SkipSigning) {
 
 Write-Host "==> Building MSI" -ForegroundColor Cyan
 $icon = Join-Path $root 'installer\assets\logo.ico'
-& wix build (Join-Path $root 'installer\wix\Moksh.wxs') `
-    -arch x64 -d "PublishDir=$stage" -d "IconFile=$icon" -o $msi
+$wixArgs = @(
+    'build', (Join-Path $root 'installer\wix\Moksh.wxs'),
+    '-arch', 'x64', '-d', "PublishDir=$stage", '-d', "IconFile=$icon", '-o', $msi
+)
+# Compiles the .NET launch condition out of the package - it carries its own runtime.
+if ($SelfContained) { $wixArgs += @('-d', 'SelfContained=1') }
+
+& wix @wixArgs
 if ($LASTEXITCODE -ne 0) { throw "wix build failed with exit code $LASTEXITCODE" }
 
 if (-not $SkipSigning) {

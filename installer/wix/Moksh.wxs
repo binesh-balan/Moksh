@@ -41,8 +41,9 @@
         AllowSameVersionUpgrades="yes"
         DowngradeErrorMessage="A newer version of [ProductName] is already installed. Uninstall it first if you want to install this older version." />
 
+    <?ifndef SelfContained ?>
     <!--
-      .NET 8 Desktop Runtime gate.
+      .NET 8 Desktop Runtime gate - framework-dependent build only.
 
       This checks whether ANY Microsoft.WindowsDesktop.App runtime is registered, not
       whether version 8 specifically is present: the runtime records installed versions
@@ -52,6 +53,9 @@
 
       For fleet deployment, declare the .NET 8 Desktop Runtime as an Intune app
       dependency instead of relying on this - Intune resolves versions properly.
+
+      The self-contained build carries its own runtime, so this condition is compiled
+      out of it entirely rather than left to pass vacuously.
     -->
     <Property Id="DOTNETDESKTOPPRESENT">
       <RegistrySearch
@@ -65,6 +69,7 @@
     <Launch
         Condition="Installed OR DOTNETDESKTOPPRESENT OR SKIPDOTNETCHECK"
         Message="[ProductName] requires the .NET 8 Desktop Runtime (x64), which was not found on this machine. Install it from https://dotnet.microsoft.com/download/dotnet/8.0 and run setup again. To bypass this check, pass SKIPDOTNETCHECK=1." />
+    <?endif ?>
 
     <!-- 64-bit only: the payload is AnyCPU but the app targets x64/ARM64 systems. -->
     <Launch

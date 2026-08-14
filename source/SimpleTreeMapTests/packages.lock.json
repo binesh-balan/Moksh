@@ -11,6 +11,7 @@
           "ObjectListView": "[6.2.0, )"
         }
       }
-    }
+    },
+    "net8.0-windows10.0.18362/win-x64": {}
   }
 }

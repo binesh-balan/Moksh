@@ -24,6 +24,16 @@
       "objectlistview": {
         "type": "Project"
       }
+    },
+    "net8.0-windows10.0.18362/win-x64": {
+      "System.Management": {
+        "type": "Transitive",
+        "resolved": "8.0.0",
+        "contentHash": "jrK22i5LRzxZCfGb+tGmke2VH7oE0DvcDlJ1HAKYU8cPmD8XnpUT0bYn2Gy98GEhGjtfbR/sxKTVb+dE770pfA==",
+        "dependencies": {
+          "System.CodeDom": "8.0.0"
+        }
+      }
     }
   }
 }

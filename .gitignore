@@ -230,3 +230,4 @@ _Pvt_Extensions
 
 # WiX build intermediates
 *.wixpdb
+/bin/release-stage-sc/

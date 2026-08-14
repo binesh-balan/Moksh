@@ -1,6 +1,7 @@
 {
   "version": 1,
   "dependencies": {
-    "net8.0-windows10.0.18362": {}
+    "net8.0-windows10.0.18362": {},
+    "net8.0-windows10.0.18362/win-x64": {}
   }
 }
